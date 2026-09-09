@@ -3,8 +3,24 @@
    Paleta basada en la identidad visual real de @olivo.tienda:
    crema/beige (fondo), verde oliva oscuro (acento principal),
    vino/burgundy y dorado mostaza (acentos del logo)
-   Tipografía: Playfair Display (serif editorial, como el logo) + Jost (sans)
+   Tipografía: Baby Coffee (títulos y subtítulos) + Jost (texto general)
    ========================================================================== */
+
+/* ---------- 0. FUENTES ---------- */
+@font-face {
+  font-family: "Baby Coffee";
+  src: url("fonts/Baby Coffee.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Baby Coffee";
+  src: url("fonts/Baby Coffee Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
 
 /* ---------- 1. VARIABLES ---------- */
 :root {
@@ -24,14 +40,14 @@
   --color-gold-soft: #cbab6c;
 
   /* Texto */
-  --color-heading: #2f3a22;
+  --color-heading: #4c5a30;
   --color-text: #453f30;
   --color-text-soft: #6c6350;
   --color-white: #fffdf7;
   --color-star: #b5924a;
 
   /* Tipografía */
-  --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-display: "Baby Coffee", Georgia, "Times New Roman", serif;
   --font-body: "Jost", "Trebuchet MS", Arial, sans-serif;
 
   /* Espaciado */
@@ -73,7 +89,7 @@ img { max-width: 100%; display: block; }
 
 h1, h2, h3, h4 {
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 400;
   line-height: 1.15;
   margin: 0;
   color: var(--color-heading);
@@ -94,7 +110,7 @@ ul { list-style: none; margin: 0; padding: 0; }
 }
 
 section > h2 {
-  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-size: clamp(3.2rem, 6vw, 4.6rem);
   text-align: center;
   margin-bottom: var(--space-lg);
 }
@@ -124,7 +140,16 @@ section > h2 {
   margin-bottom: var(--space-xs);
 }
 
-.eyebrow-light { color: rgba(255, 253, 247, 0.95); text-shadow: 0 1px 3px rgba(0, 0, 0, 0.55), 0 2px 10px rgba(0, 0, 0, 0.4); }
+/* Recortes decorativos (ramas de olivo, tazas, personajes) tomados de
+   referencias e ilustrados como stickers sueltos alrededor de la página,
+   igual que en el proyecto de Vida Café. Cada instancia fija su propio
+   tamaño/posición/rotación por style inline. */
+.site-doodle {
+  position: absolute;
+  z-index: 0;
+  opacity: 0.9;
+  pointer-events: none;
+}
 
 /* ---------- 3. BUTTONS ---------- */
 .btn {
@@ -145,17 +170,6 @@ section > h2 {
   color: var(--color-white);
 }
 .btn-primary:hover { background: var(--color-olive-dark); transform: translateY(-1px); }
-
-.btn-secondary {
-  background: transparent;
-  color: var(--color-white);
-  border-color: rgba(255, 253, 247, 0.7);
-}
-.btn-secondary:hover {
-  background: rgba(255, 253, 247, 0.14);
-  border-color: var(--color-white);
-  transform: translateY(-1px);
-}
 
 .btn-outline {
   background: transparent;
@@ -330,18 +344,20 @@ section > h2 {
   text-align: center;
   padding: var(--header-clearance) var(--space-md) var(--space-2xl);
   background:
-    linear-gradient(180deg, rgba(30, 36, 20, 0.08) 0%, rgba(30, 36, 20, 0.28) 68%, var(--color-bg) 100%),
+    /* Oscurecido parejo, solo para que el texto resalte sobre la foto */
+    linear-gradient(rgba(10, 12, 6, 0.32), rgba(10, 12, 6, 0.32)),
     /* FOTO REAL: foto tomada del Instagram @olivo.tienda (carrito con toldo verde) */
-    url("images/ig-carrito-hero.png")
-      center / cover no-repeat;
+    url("images/ig-carrito-hero.png") center 38% / cover no-repeat;
 }
 
 .hero-content {
+  position: relative;
+  z-index: 1;
   max-width: 700px;
 }
 
 .hero h1 {
-  font-size: clamp(2.75rem, 6vw, 4.5rem);
+  font-size: clamp(5rem, 12vw, 8rem);
   color: var(--color-white);
   margin-bottom: var(--space-sm);
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.55), 0 4px 22px rgba(0, 0, 0, 0.5);
@@ -350,10 +366,15 @@ section > h2 {
 .hero-tagline {
   font-family: var(--font-display);
   font-style: italic;
-  font-size: clamp(1.1rem, 2vw, 1.4rem);
-  color: rgba(255, 253, 247, 0.97);
+  font-size: clamp(2.1rem, 4vw, 2.8rem);
+  color: var(--color-white);
   margin-bottom: var(--space-lg);
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.55), 0 3px 16px rgba(0, 0, 0, 0.5);
+}
+
+.hero .eyebrow {
+  color: var(--color-white);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.55), 0 2px 10px rgba(0, 0, 0, 0.4);
 }
 
 .hero-actions {
@@ -365,7 +386,8 @@ section > h2 {
 
 /* ---------- 6. SOBRE OLIVO ---------- */
 .about {
-  padding: var(--space-2xl) var(--space-md);
+  position: relative;
+  padding: var(--space-2xl) var(--space-md) var(--space-lg);
   background: var(--color-bg);
 }
 
@@ -373,7 +395,7 @@ section > h2 {
   max-width: 1080px;
   margin: 0 auto;
   display: flex;
-  align-items: stretch;
+  align-items: center;
   background: var(--color-panel);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
@@ -391,7 +413,7 @@ section > h2 {
 }
 
 .about-text h2 {
-  font-size: clamp(1.9rem, 3vw, 2.4rem);
+  font-size: clamp(3.4rem, 5.5vw, 4.4rem);
   margin-bottom: var(--space-md);
   position: relative;
   padding-bottom: var(--space-sm);
@@ -413,19 +435,28 @@ section > h2 {
 }
 .about-text p + p { margin-top: 1.1em; }
 
+/* Recuadro placeholder mientras Olivo confirma la foto real, igual que en
+   el proyecto de Vida Café: un marco punteado con texto centrado. */
 .about-image {
   flex: 1 1 50%;
-  min-height: 420px;
-}
-.about-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  aspect-ratio: 998 / 809;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-lg);
+  margin: var(--space-md);
+  border: 2px dashed var(--color-olive-soft);
+  border-radius: var(--radius);
+  background: var(--color-bg);
+  color: var(--color-text-soft);
+  font-size: 1.05rem;
 }
 
 /* ---------- 7. ESPECIALIDADES (teaser en index.html) ---------- */
 .especialidades {
-  padding: var(--space-2xl) var(--space-md);
+  position: relative;
+  padding: var(--space-lg) var(--space-md) var(--space-2xl);
   background: var(--color-bg);
 }
 
@@ -464,7 +495,7 @@ section > h2 {
 }
 
 .tarjeta h3 {
-  font-size: 1.4rem;
+  font-size: 2.6rem;
   color: var(--color-wine);
   margin-bottom: 0.6rem;
 }
@@ -485,27 +516,22 @@ section > h2 {
   justify-content: center;
   text-align: center;
   padding: var(--header-clearance) var(--space-md) var(--space-xl);
-  background:
-    linear-gradient(180deg, rgba(30, 36, 20, 0.15) 0%, rgba(30, 36, 20, 0.38) 72%, var(--color-bg) 100%),
-    /* FOTO REAL: foto tomada del Instagram @olivo.tienda */
-    url("images/ig-cup-castelar.png")
-      center / cover no-repeat;
+  background: var(--color-bg);
+  overflow: hidden;
 }
 
 .menu-cover h1 {
-  font-size: clamp(2.5rem, 6vw, 4rem);
-  color: var(--color-white);
+  font-size: clamp(4.4rem, 9.5vw, 7rem);
+  color: var(--color-olive);
   margin-bottom: var(--space-sm);
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.55), 0 4px 22px rgba(0, 0, 0, 0.5);
 }
 
 .menu-cover-tagline {
   font-family: var(--font-display);
   font-style: italic;
-  font-size: clamp(1rem, 1.8vw, 1.2rem);
-  color: rgba(255, 253, 247, 0.97);
+  font-size: clamp(1.8rem, 3.6vw, 2.4rem);
+  color: var(--color-olive);
   margin-bottom: var(--space-lg);
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.55), 0 3px 16px rgba(0, 0, 0, 0.5);
 }
 
 .menu-cover-actions {
@@ -516,6 +542,7 @@ section > h2 {
 }
 
 .menu {
+  position: relative;
   padding: var(--space-2xl) var(--space-md);
   background: var(--color-bg);
 }
@@ -528,7 +555,7 @@ section > h2 {
 .menu-category:last-of-type { margin-bottom: var(--space-lg); }
 
 .menu-category h2 {
-  font-size: 1.4rem;
+  font-size: 2.6rem;
   color: var(--color-wine);
   text-align: center;
   margin-bottom: var(--space-md);
@@ -565,7 +592,8 @@ section > h2 {
 
 .item-price {
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 400;
+  font-size: 1.7rem;
   color: var(--color-gold);
   white-space: nowrap;
 }
@@ -586,8 +614,9 @@ section > h2 {
 
 /* ---------- 8. GALERÍA ---------- */
 .gallery {
+  position: relative;
   padding: var(--space-2xl) var(--space-md);
-  background: var(--color-panel);
+  background: var(--color-bg);
 }
 
 .gallery-grid {
@@ -621,7 +650,8 @@ section > h2 {
 
 /* ---------- 9. UBICACIÓN ---------- */
 .location {
-  padding: var(--space-2xl) var(--space-md);
+  position: relative;
+  padding: var(--space-2xl) var(--space-md) var(--space-md);
   background: var(--color-bg);
 }
 
@@ -658,7 +688,7 @@ section > h2 {
 }
 
 .location-card h3 {
-  font-size: 1.25rem;
+  font-size: 2.3rem;
   color: var(--color-wine);
   margin-bottom: var(--space-sm);
 }
@@ -684,10 +714,18 @@ section > h2 {
   display: block;
 }
 
+.location-close {
+  display: block;
+  width: 280px;
+  margin: var(--space-md) auto 0;
+  opacity: 0.9;
+}
+
 /* ---------- 10. CONTACTO / REDES ---------- */
 .contact {
-  padding: var(--space-2xl) var(--space-md);
-  background: var(--color-panel);
+  position: relative;
+  padding: var(--space-md) var(--space-md) var(--space-2xl);
+  background: var(--color-bg);
 }
 
 .contact-grid {
@@ -702,7 +740,7 @@ section > h2 {
   display: flex;
   align-items: center;
   gap: var(--space-sm);
-  background: var(--color-bg);
+  background: var(--color-panel);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: var(--space-md);
@@ -734,7 +772,7 @@ section > h2 {
 .contact-card strong {
   font-family: var(--font-display);
   color: var(--color-wine);
-  font-size: 1.05rem;
+  font-size: 1.9rem;
 }
 
 /* ---------- 11. FOOTER ---------- */
@@ -750,7 +788,7 @@ section > h2 {
 
 .footer-brand {
   font-family: var(--font-display);
-  font-size: 1.6rem;
+  font-size: 3rem;
   color: var(--color-white);
   margin-bottom: var(--space-md);
 }
@@ -778,7 +816,7 @@ section > h2 {
 /* ---------- 12. RESPONSIVE ---------- */
 @media (max-width: 900px) {
   .about-card { flex-direction: column; }
-  .about-image { min-height: 260px; order: -1; }
+  .about-image { order: -1; }
   .location-grid { grid-template-columns: 1fr; max-width: 480px; }
   .contact-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
 }
@@ -790,6 +828,10 @@ section > h2 {
   }
 
   .site-header { width: calc(100% - 1.25rem); border-radius: 20px; }
+
+  /* Los doodles decorativos se esconden en pantallas angostas para no
+     encimarse con el texto ni los botones. */
+  .site-doodle { display: none; }
 
   .header-social { display: none; }
 
@@ -855,6 +897,7 @@ section > h2 {
 
   .categories-nav {
     position: static;
+    transform: none;
     width: auto;
     max-height: none;
     overflow-x: auto;
