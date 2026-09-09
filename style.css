@@ -770,9 +770,10 @@ section > h2 {
 }
 
 .contact-card strong {
-  font-family: var(--font-display);
+  font-family: var(--font-body);
+  font-weight: 600;
   color: var(--color-wine);
-  font-size: 1.9rem;
+  font-size: 1.15rem;
 }
 
 /* ---------- 11. FOOTER ---------- */
