@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://olivo-tienda.a01771796.workers.dev/sitemap.xml
+Sitemap: https://olivo-website.a01771796.workers.dev/sitemap.xml
