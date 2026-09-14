@@ -94,6 +94,22 @@
     </div>
   </header>
 
+  <!-- Placa flotante: acompaña toda la página (fixed), no solo el hero -->
+  <button type="button" class="hero-badge" id="hero-badge-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="hero-badge-menu">
+    <img src="images/logo-olivo.png" alt="">
+    <span>Té y café<br>de verdad</span>
+  </button>
+  <div class="hero-badge-menu" id="hero-badge-menu">
+    <a href="https://www.instagram.com/olivo.tienda/" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg>
+      Instagram
+    </a>
+    <a href="https://wa.me/529871161167?text=Hola%2C%20quiero%20pedir%20en%20Olivo" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm5.8 14.14c-.24.68-1.4 1.3-1.93 1.35-.5.05-.96.24-3.22-.67-2.72-1.09-4.46-3.87-4.6-4.05-.13-.18-1.1-1.47-1.1-2.8 0-1.34.7-1.99.95-2.26.24-.27.53-.34.71-.34l.5.01c.16 0 .38-.06.6.46.24.57.8 1.98.87 2.13.07.14.11.31.02.5-.09.18-.14.29-.27.45-.14.16-.29.36-.41.48-.14.14-.28.29-.12.57.16.28.71 1.18 1.53 1.91 1.05.94 1.94 1.24 2.22 1.38.28.14.44.12.6-.07.16-.19.68-.8.87-1.07.18-.27.36-.23.6-.14.24.09 1.55.73 1.82.87.27.14.44.2.51.32.07.11.07.65-.17 1.33z"/></svg>
+      WhatsApp
+    </a>
+  </div>
+
   <main id="top">
 
     <!-- ============ HERO ============ -->
@@ -113,7 +129,7 @@
     <section id="sobre-olivo" class="about">
       <img src="images/decor-rama-olivo.png" alt="" class="site-doodle" style="top:2%; left:1%; width:90px; transform:rotate(-8deg) scaleX(-1);">
       <img src="images/decor-rama-olivo.png" alt="" class="site-doodle" style="top:2%; right:1%; width:90px; transform:rotate(8deg);">
-      <div class="about-card">
+      <div class="about-card reveal">
         <div class="about-text">
           <span class="eyebrow">Té y café</span>
           <h2>Quiénes somos</h2>
@@ -139,10 +155,10 @@
     <section id="especialidades" class="especialidades">
       <img src="images/decor-rama-lineas.png" alt="" class="site-doodle" style="top:2%; left:3%; width:85px; transform:rotate(-6deg);">
       <img src="images/decor-rama-lineas.png" alt="" class="site-doodle" style="top:2%; right:3%; width:85px; transform:rotate(6deg) scaleX(-1);">
-      <h2>Conoce nuestro menú</h2>
+      <h2 class="reveal">Conoce nuestro menú</h2>
       <p class="menu-note">Precios y menú por confirmar (demo)</p>
 
-      <div class="tarjetas">
+      <div class="tarjetas" data-reveal-group>
         <article class="tarjeta">
           <!-- FOTO REAL: tomada del Instagram @olivo.tienda -->
           <img src="images/ig-lattes-ventana.png" alt="Café Olivo con arte latte" loading="lazy">
@@ -176,10 +192,10 @@
     <section id="galeria" class="gallery">
       <img src="images/decor-rama-lineas.png" alt="" class="site-doodle" style="top:2%; left:3%; width:85px; transform:rotate(-6deg);">
       <img src="images/decor-rama-lineas.png" alt="" class="site-doodle" style="top:2%; right:3%; width:85px; transform:rotate(6deg) scaleX(-1);">
-      <h2>Galería</h2>
+      <h2 class="reveal">Galería</h2>
       <p class="menu-note">Fotos reales de Olivo, tomadas de nuestro Instagram <a href="https://www.instagram.com/olivo.tienda/" target="_blank" rel="noopener">@olivo.tienda</a>.</p>
 
-      <div class="gallery-grid">
+      <div class="gallery-grid" data-reveal-group>
         <div class="gallery-item">
           <img src="images/ig-carrito-barista.png" alt="Carrito de té y café de Olivo con barista, en un bazar" loading="lazy">
         </div>
@@ -196,10 +212,10 @@
     <section id="ubicacion" class="location">
       <img src="images/decor-rama-olivo.png" alt="" class="site-doodle" style="top:2%; left:1%; width:80px; transform:rotate(150deg);">
       <img src="images/decor-rama-olivo.png" alt="" class="site-doodle" style="top:2%; right:1%; width:80px; transform:rotate(240deg) scaleX(-1);">
-      <h2>Ubicación y horario</h2>
+      <h2 class="reveal">Ubicación y horario</h2>
       <p class="location-intro">Estamos en Bellavista, Metepec, Estado de México.</p>
 
-      <div class="location-grid">
+      <div class="location-grid" data-reveal-group>
         <div class="location-card">
           <h3>Horario</h3>
           <!-- Horario tomado de una publicación etiquetada en el Instagram de Olivo (marzo 2025); confirmar que siga vigente -->
@@ -232,8 +248,8 @@
 
     <!-- ============ CONTACTO / REDES ============ -->
     <section id="contacto" class="contact">
-      <h2>Contacto y redes</h2>
-      <div class="contact-grid">
+      <h2 class="reveal">Contacto y redes</h2>
+      <div class="contact-grid" data-reveal-group>
         <a class="contact-card" href="https://wa.me/529871161167?text=Hola%2C%20quiero%20pedir%20en%20Olivo" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm5.8 14.14c-.24.68-1.4 1.3-1.93 1.35-.5.05-.96.24-3.22-.67-2.72-1.09-4.46-3.87-4.6-4.05-.13-.18-1.1-1.47-1.1-2.8 0-1.34.7-1.99.95-2.26.24-.27.53-.34.71-.34l.5.01c.16 0 .38-.06.6.46.24.57.8 1.98.87 2.13.07.14.11.31.02.5-.09.18-.14.29-.27.45-.14.16-.29.36-.41.48-.14.14-.28.29-.12.57.16.28.71 1.18 1.53 1.91 1.05.94 1.94 1.24 2.22 1.38.28.14.44.12.6-.07.16-.19.68-.8.87-1.07.18-.27.36-.23.6-.14.24.09 1.55.73 1.82.87.27.14.44.2.51.32.07.11.07.65-.17 1.33z"/></svg>
           <span>

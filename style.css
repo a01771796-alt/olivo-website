@@ -50,13 +50,14 @@
   --font-display: "Baby Coffee", Georgia, "Times New Roman", serif;
   --font-body: "Jost", "Trebuchet MS", Arial, sans-serif;
 
-  /* Espaciado */
+  /* Espaciado — lg/xl/2xl crecen en pantallas grandes (más aire tipo revista);
+     el mínimo del clamp() es igual al valor de antes, así que en mobile no cambia nada. */
   --space-xs: 0.5rem;
   --space-sm: 1rem;
   --space-md: 1.75rem;
-  --space-lg: 3rem;
-  --space-xl: 5rem;
-  --space-2xl: 5.5rem;
+  --space-lg: clamp(3rem, 2.4rem + 2vw, 4.25rem);
+  --space-xl: clamp(5rem, 4rem + 3.5vw, 7rem);
+  --space-2xl: clamp(5.5rem, 4.2rem + 5vw, 8.5rem);
 
   /* Layout */
   --content-max: 1180px;
@@ -73,7 +74,6 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: var(--header-clearance);
 }
 
 body {
@@ -132,12 +132,25 @@ section > h2 {
 }
 
 .eyebrow {
-  display: block;
+  position: relative;
+  display: inline-block;
   font-size: 0.78rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--color-wine);
   margin-bottom: var(--space-xs);
+}
+
+/* "Circulado a mano" — motivo de marca recurrente sobre las etiquetas chicas */
+.eyebrow::before {
+  content: "";
+  position: absolute;
+  inset: -0.4em -0.7em;
+  border: 2px solid var(--color-gold);
+  border-radius: 60% 40% 55% 45% / 45% 55% 45% 55%;
+  transform: rotate(-2deg);
+  opacity: 0.75;
+  pointer-events: none;
 }
 
 /* Recortes decorativos (ramas de olivo, tazas, personajes) tomados de
@@ -346,14 +359,114 @@ section > h2 {
   background:
     /* Oscurecido parejo, solo para que el texto resalte sobre la foto */
     linear-gradient(rgba(10, 12, 6, 0.32), rgba(10, 12, 6, 0.32)),
-    /* FOTO REAL: foto tomada del Instagram @olivo.tienda (carrito con toldo verde) */
-    url("images/ig-carrito-hero.png") center 38% / cover no-repeat;
+    url("images/hero-olivar.jpg") center 45% / cover no-repeat;
 }
 
 .hero-content {
   position: relative;
   z-index: 1;
   max-width: 700px;
+}
+
+/* Placa flotante — motivo de marca recurrente (el logo real, como un sello) */
+.hero-badge {
+  position: fixed;
+  z-index: 40;
+  left: var(--space-md);
+  bottom: var(--space-md);
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  background: rgba(255, 253, 247, 0.94);
+  border: none;
+  border-radius: 999px;
+  padding: 0.5rem 1.2rem 0.5rem 0.5rem;
+  box-shadow: 0 15px 34px rgba(0, 0, 0, 0.28);
+  transform: rotate(-4deg);
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.hero-badge:hover,
+.hero-badge[aria-expanded="true"] {
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.38);
+  transform: rotate(-4deg) translateY(-2px);
+}
+
+.hero-badge-menu {
+  position: fixed;
+  z-index: 41;
+  left: var(--space-md);
+  bottom: calc(var(--space-md) + 84px);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  background: var(--color-white);
+  border-radius: var(--radius);
+  padding: 0.5rem;
+  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  transition: opacity var(--transition), transform var(--transition), visibility var(--transition);
+}
+
+.hero-badge-menu.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.hero-badge-menu a {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6em 0.9em;
+  border-radius: calc(var(--radius) - 2px);
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--color-text);
+  white-space: nowrap;
+  transition: background var(--transition), color var(--transition);
+}
+
+.hero-badge-menu a:hover {
+  background: var(--color-bg);
+  color: var(--color-olive);
+}
+
+.hero-badge-menu svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: var(--color-olive);
+}
+
+@media (max-width: 640px) {
+  .hero-badge-menu { left: var(--space-sm); bottom: calc(var(--space-sm) + 78px); }
+}
+
+.hero-badge img {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.hero-badge span {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1rem;
+  line-height: 1.15;
+  color: var(--color-olive-dark);
+}
+
+@media (max-width: 640px) {
+  .hero-badge { left: var(--space-sm); bottom: var(--space-sm); }
 }
 
 .hero h1 {
@@ -389,6 +502,9 @@ section > h2 {
   position: relative;
   padding: var(--space-2xl) var(--space-md) var(--space-lg);
   background: var(--color-bg);
+  /* Compensa el padding-top propio para que la rayita dorada de arriba
+     quede justo debajo del header al llegar por un enlace de ancla. */
+  scroll-margin-top: calc(var(--header-clearance) - var(--space-lg));
 }
 
 .about-card {
@@ -458,6 +574,7 @@ section > h2 {
   position: relative;
   padding: var(--space-lg) var(--space-md) var(--space-2xl);
   background: var(--color-bg);
+  scroll-margin-top: calc(var(--header-clearance) - var(--space-sm));
 }
 
 .tarjetas {
@@ -471,7 +588,6 @@ section > h2 {
 
 .tarjeta {
   width: 320px;
-  padding: 2.1rem 1.6rem 1.9rem;
   background: var(--color-panel);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
@@ -481,29 +597,32 @@ section > h2 {
 }
 
 .tarjeta:hover {
-  transform: translateY(-6px) scale(1.02);
+  transform: translateY(-6px);
   box-shadow: 0 22px 48px rgba(51, 63, 31, 0.2);
   border-color: rgba(181, 146, 74, 0.35);
 }
 
 .tarjeta img {
-  max-width: none;
-  width: calc(100% + 3.2rem);
+  width: 100%;
   height: 200px;
   object-fit: cover;
-  margin: -2.1rem -1.6rem 1.4rem;
 }
 
 .tarjeta h3 {
-  font-size: 2.6rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1.3rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   color: var(--color-wine);
-  margin-bottom: 0.6rem;
+  margin: 1.4rem 1.6rem 0.6rem;
 }
 
 .tarjeta p {
   font-size: 0.98rem;
   line-height: 1.7;
   color: var(--color-text-soft);
+  margin: 0 1.6rem 1.9rem;
 }
 
 /* ---------- 7b. MENÚ (página menu.html) ---------- */
@@ -617,6 +736,7 @@ section > h2 {
   position: relative;
   padding: var(--space-2xl) var(--space-md);
   background: var(--color-bg);
+  scroll-margin-top: calc(var(--header-clearance) - var(--space-lg));
 }
 
 .gallery-grid {
@@ -637,7 +757,7 @@ section > h2 {
 }
 
 .gallery-item:hover {
-  transform: translateY(-6px) scale(1.02);
+  transform: translateY(-6px);
   box-shadow: 0 22px 48px rgba(51, 63, 31, 0.2);
   border-color: rgba(181, 146, 74, 0.35);
 }
@@ -653,6 +773,7 @@ section > h2 {
   position: relative;
   padding: var(--space-2xl) var(--space-md) var(--space-md);
   background: var(--color-bg);
+  scroll-margin-top: calc(var(--header-clearance) - var(--space-lg));
 }
 
 .location-intro {
@@ -688,7 +809,11 @@ section > h2 {
 }
 
 .location-card h3 {
-  font-size: 2.3rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1.3rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   color: var(--color-wine);
   margin-bottom: var(--space-sm);
 }
@@ -934,4 +1059,33 @@ section > h2 {
 @media (max-width: 480px) {
   .gallery-grid { grid-template-columns: repeat(2, 1fr); }
   .gallery-item:last-child { grid-column: span 2; }
+}
+
+/* ---------- 13. REVEAL AL HACER SCROLL / HEADER CON SCROLL ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+.site-header {
+  transition: background var(--transition), box-shadow var(--transition);
+}
+
+.site-header.is-scrolled {
+  background: rgba(47, 58, 34, 0.82);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
 }
