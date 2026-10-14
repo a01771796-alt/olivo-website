@@ -1089,3 +1089,8 @@ section > h2 {
   background: rgba(47, 58, 34, 0.82);
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
 }
+
+/* Crédito de Nucleo: obligatorio en todo sitio (demo o vendido); solo se quita si Luis lo indica para ese cliente. */
+.footer-credito { font-size: 0.8rem; margin-top: 0.5rem; }
+.footer-credito a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+.footer-credito a:hover { opacity: 0.8; }
